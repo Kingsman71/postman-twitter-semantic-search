@@ -1,27 +1,49 @@
-This is a Postman Collection for the Twitter API v2 endpoints.
+# Postman Twitter API - Semantic Search
 
-Refer to the main [Twitter API documentation](https://developer.twitter.com/en/docs) for more details.
+A tool that enables semantic search across the Twitter API v2 Postman collection using AI-powered embeddings.
 
-If you have an API-related question, you can also discuss in the developer [community forum](https://twittercommunity.com).
+## Overview
+
+This project provides a command-line utility to search through Twitter API v2 endpoints semantically. Instead of exact keyword matching, it uses machine learning embeddings to understand the meaning of your queries and find the most relevant API endpoints.
+
+## Features
+
+- **Semantic Search**: Search API endpoints by meaning, not just keywords
+- **AI-Powered**: Uses `sentence-transformers` for generating embeddings
+- **Fast Retrieval**: Leverages FAISS for efficient similarity search
+- **Postman Integration**: Works with the official Twitter API v2 Postman collection
+
+## Requirements
+
+- Python 3.7+
+- Dependencies listed in `requirements.txt`:
+  - `sentence-transformers`
+  - `faiss-cpu`
+  - `numpy`
 
 ## Installation
 
-### Quick install
+1. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Go to the [Collection](https://t.co/twitter-api-postman) and click `Run in Postman`.
+2. Run the semantic search utility:
+   ```bash
+   python semantic_search.py --query "your search query"
+   ```
 
-### Manual install
+## How It Works
 
-You can also download this Collection from a GitHub repo here: https://github.com/twitterdev/postman-twitter-api
+1. **Loads** the Twitter API v2 Postman collection
+2. **Extracts** all API request information (methods, URLs, parameters, descriptions)
+3. **Generates** embeddings using sentence transformers
+4. **Indexes** them with FAISS for fast similarity search
+5. **Returns** the most relevant endpoints based on your query
 
-## Environment
+## Files
 
-This Collection includes a pre-configured Environment. You will need to set up the following variables in order to run each request (depending on the authentication type used by the request you are sending):
-
-| Name              | Description              |
-| ----------------- | ------------------------ |
-| `consumer_key`    | Your consumer key        |
-| `consumer_secret` | Your consumer secret     |
-| `access_token`    | Your access token        |
-| `token_secret`    | Your access token secret |
-| `bearer_token`    | Your bearer token        |
+- `semantic_search.py` - Main utility script
+- `Twitter API v2.postman_collection.json` - Official Twitter API v2 endpoints
+- `Twitter API v2.postman_environment.json` - Environment variables for Postman
+- `requirements.txt` - Python dependencies
